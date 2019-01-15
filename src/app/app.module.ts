@@ -3,13 +3,12 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { MessagesComponent } from './messages/messages.component';
-import { TasksComponent } from './tasks/tasks.component';
 import { NavComponent } from './nav/nav.component';
-
-import * as $ from 'jquery';
-import { FullCalendarModule } from 'ng-fullcalendar';
+import { TasksComponent } from './tasks/tasks.component';
+import { MessagesComponent } from './messages/messages.component';
 import { CalendarComponent } from './calendar/calendar.component';
+
+import { FullCalendarModule } from 'ng-fullcalendar';
 
 @NgModule({
   declarations: [

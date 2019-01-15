@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import * as $ from 'jquery';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-calendar',
@@ -7,6 +8,8 @@ import * as $ from 'jquery';
   styleUrls: ['./calendar.component.scss']
 })
 export class CalendarComponent implements OnInit {
+
+   test = moment(new Date()).format('YYYY/MM/DD');
 
   constructor() { }
 
@@ -17,7 +20,9 @@ export class CalendarComponent implements OnInit {
           center: 'title',
           right: 'month,basicWeek,basicDay'
       },
-      defaultDate: '2016-12-12',
+      firstDay: 1,
+      locale: 'da',
+      defaultDate: moment().format('YYYY/MM/DD'), // defaultDate: '2016-12-12',
       navLinks: true, // can click day/week names to navigate views
       editable: true,
       eventLimit: true, // allow "more" link when too many events
