@@ -8,6 +8,7 @@ import { MessageService } from './message.service';
 export class DataService {
 
   tasks: Task[] = [];
+  events = [];
 
   constructor(private messageService: MessageService) { }
 
@@ -36,4 +37,22 @@ export class DataService {
       });
     });
   }
+
+  addEvent(event): void {
+    // Gives the event an id
+    if (this.events.length !== 0) {
+      const nextID = this.events[this.events.length - 1].id + 1;
+      event.id = nextID;
+    } else {
+      event.id = 1;
+    }
+
+    this.events.push(event);
+  }
+
+  // Skal testes
+  // removeEvent(id: number): void {
+  //   const index = this.events.findIndex(element => element.id === id);
+  //   this.events.splice(index, 1);
+  // }
 }

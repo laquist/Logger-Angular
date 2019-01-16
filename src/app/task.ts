@@ -11,8 +11,7 @@ export class Task {
         this.details = details;
     }
 
-    complete(): void {
-        const timestamp = new Date();
+    complete(timestamp): void {
         this.completed.push(timestamp);
 
         // console.log('Completed ' + this.name);
