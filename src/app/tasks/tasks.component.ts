@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
 import { DataService } from '../data.service';
-import { MessageService } from '../message.service';
 
 import * as moment from 'moment';
 
@@ -12,10 +11,7 @@ import * as moment from 'moment';
 })
 export class TasksComponent implements OnInit {
 
-  constructor(
-    private dataService: DataService,
-    private messageService: MessageService
-  ) { }
+  constructor(private dataService: DataService) { }
 
   ngOnInit() {
     this.dataService.createTestData();
@@ -33,19 +29,12 @@ export class TasksComponent implements OnInit {
     // Creates Calendar Event
     const newEvent = {
       title: task.name,
-      // start: completionDate.format(),
-      start: moment().format(),
+      start: completionDate.format(),
       description: task.details,
       taskID: task.id,
       className: 'task' + task.id,
     };
 
     this.dataService.addEvent(newEvent);
-
-    // Temp
-    console.log(this.dataService.events);
-
-    // Adds message
-    this.messageService.add('Completed ' + task.name);
   }
 }
