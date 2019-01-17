@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Task } from './task';
-import { MessageService } from './message.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +9,7 @@ export class DataService {
   tasks: Task[] = [];
   events = [];
 
-  constructor(private messageService: MessageService) { }
+  constructor() { }
 
   createTestData(): void {
     if (this.tasks.length === 0) {
@@ -32,8 +31,8 @@ export class DataService {
 
         const formatted = completeString.split(' GMT')[0];
 
-        // Add to Messages
-        this.messageService.add(formatted);
+        // Logs result
+        console.log(formatted);
       });
     });
   }
