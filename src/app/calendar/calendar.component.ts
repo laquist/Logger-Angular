@@ -29,17 +29,18 @@ export class CalendarComponent implements OnInit {
         navLinks: true, // can click day/week names to navigate views
         editable: true,
         eventLimit: true, // allow "more" link when too many events
-        defaultDate: moment().format('YYYY/MM/DD'),
+        defaultDate: moment(),
         firstDay: 1, // Monday
         locale: 'da',
-        timeFormat: 'h:mm', // Remove 'a' and 'p' after time (11:45a)
+        timeFormat: 'h:mm', // Removes 'a' and 'p' after time (11:45a)
     });
 
   }
 
   updateEvents(): void {
-    // Removes all EventSources andd adds the EventSource again (to update it on the page)
-    $('#calendar').fullCalendar( 'removeEventSources' );
+    // Removes all EventSources and adds the EventSource again (to update it on the page)
+    // @ts-ignore
+    $('#calendar').fullCalendar( 'removeEventSources' ); // ** Denne skal udkommenteres hver gang, for at kunne ng serve!!
     $('#calendar').fullCalendar( 'addEventSource', this.dataService.events );
 
     console.log($('#calendar').fullCalendar( 'getEventSources' ));
