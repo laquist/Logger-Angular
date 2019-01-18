@@ -20,7 +20,7 @@ import { FullCalendarModule } from 'ng-fullcalendar';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FullCalendarModule
+    FullCalendarModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

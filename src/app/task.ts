@@ -16,10 +16,4 @@ export class Task {
 
         // console.log('Completed ' + this.name);
     }
-
-    // log(): void {
-    //     console.log('');
-    //     console.log('Completed:');
-    //     console.log(this.completed);
-    // }
 }

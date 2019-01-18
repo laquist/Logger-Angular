@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Task } from './task';
+import { Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -54,4 +55,13 @@ export class DataService {
   //   const index = this.events.findIndex(element => element.id === id);
   //   this.events.splice(index, 1);
   // }
+
+
+
+  // TEST
+  // Prøv at gøre det med obserables, som i dette eksempel:
+  // https://github.com/ng-fullcalendar/ng-fullcalendar-demo/tree/master/src/app
+  getEventsTest(): Observable<any> {
+    return of(this.events);
+  }
 }

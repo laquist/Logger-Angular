@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, Input } from '@angular/core';
 
 import { DataService } from '../data.service';
+import { CalendarComponent as ngCalenderComponent } from 'ng-fullcalendar';
+import { Options } from 'fullcalendar';
 
 import * as $ from 'jquery';
 import * as moment from 'moment';
@@ -12,6 +14,13 @@ import * as moment from 'moment';
 })
 export class CalendarComponent implements OnInit {
 
+  @ViewChild(ngCalenderComponent) ucCalendar: ngCalenderComponent;
+  calendarOptions: Options;
+
+  @Input() eventsInput;
+  @Input() eventsInputTwo;
+  events: null;
+
   constructor(private dataService: DataService) { }
 
   ngOnInit() {
@@ -20,30 +29,43 @@ export class CalendarComponent implements OnInit {
   }
 
   createCalendar(): void {
-    $('#calendar').fullCalendar({
-        header: {
-            left: 'prev,next today',
-            center: 'title',
-            right: 'month,basicWeek,basicDay'
-        },
-        navLinks: true, // can click day/week names to navigate views
-        editable: true,
-        eventLimit: true, // allow "more" link when too many events
-        defaultDate: moment(),
-        firstDay: 1, // Monday
-        locale: 'da',
-        timeFormat: 'h:mm', // Removes 'a' and 'p' after time (11:45a)
-    });
+  this.calendarOptions = {
+      editable: true,
+      eventLimit: false,
+      header: {
+        left: 'prev, next today',
+        center: 'title',
+        right: 'month, basicWeek, basicDay'
+        // right: 'month,agendaWeek,agendaDay,listMonth'
+      },
+      events: []
+    };
+  }
 
+  clearEvents(): void {
+    this.calendarOptions.events = [];
+
+    console.log('Cleared events');
   }
 
   updateEvents(): void {
-    // Removes all EventSources and adds the EventSource again (to update it on the page)
-    // @ts-ignore
-    $('#calendar').fullCalendar( 'removeEventSources' ); // ** Denne skal udkommenteres hver gang, for at kunne ng serve!!
-    $('#calendar').fullCalendar( 'addEventSource', this.dataService.events );
+    // this.ucCalendar.fullCalendar('rerenderEvents');
 
-    console.log($('#calendar').fullCalendar( 'getEventSources' ));
-    console.log('Updated events');
+    // this.ucCalendar.fullCalendar('removeEventSources');
+    // this.ucCalendar.fullCalendar('addEventSource', this.eventsInputTwo);
+
+    console.log('');
+    console.log('this.eventsInputTwo before:');
+    console.log(this.eventsInputTwo);
+
+    console.log('this.events before:');
+    console.log(this.events);
+
+    this.events = this.eventsInputTwo;
+
+    console.log('////////////////////');
+
+    console.log('this.events after:');
+    console.log(this.events);
   }
 }

@@ -1,15 +1,22 @@
 <div class="row">
 
-  <div class="col-6">
-    <button (click)="createCalendar()">createCalendar</button>
-  </div>
-  <div class="col-6 mb-5">
-    <button (click)="updateEvents()">Update Events</button>
+  <div class="col mb-5">
+    <button type="button" class="btn btn-success" (click)="updateEvents()">Update Events</button>
   </div>
 
   <div class="col">
+    <h5>Events:</h5>
+    <ul>
+      <li *ngFor="let event of eventsInput">{{ event.title }}</li>
+    </ul>
+  </div>
+
+  <div class="col-12">
     
-    <div id="calendar"></div>
+    <div *ngIf="calendarOptions">
+      <ng-fullcalendar #ucCalendar [options]="calendarOptions" [(eventsModel)]="events"></ng-fullcalendar>
+      <!-- <ng-fullcalendar #ucCalendar [options]="calendarOptions" [(eventsModel)]="eventsInput" (eventClick)="eventClick($event.detail)" (eventDrop)="updateEvent($event.detail)" (eventResize)="updateEvent($event.detail)" (clickButton)="clickButton($event.detail)"></ng-fullcalendar> -->
+    </div>
 
   </div>
 </div>
