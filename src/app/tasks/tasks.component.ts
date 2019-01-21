@@ -10,8 +10,6 @@ import * as moment from 'moment';
 })
 export class TasksComponent implements OnInit {
 
-  @Output() clickEmitter = new EventEmitter();
-
   constructor(private dataService: DataService) { }
 
   ngOnInit() {
@@ -37,11 +35,5 @@ export class TasksComponent implements OnInit {
     };
 
     this.dataService.addEvent(newEvent);
-
-    this.clickEmitter.emit(true);
-  }
-
-  test() {
-    console.log('test');
   }
 }

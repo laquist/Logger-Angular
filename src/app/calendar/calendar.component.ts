@@ -18,6 +18,7 @@ export class CalendarComponent implements OnInit, OnChanges {
   calendarOptions: Options;
 
   @Input() eventsInput;
+  @Input() twoWayTest;
 
   constructor(private dataService: DataService) { }
 
@@ -40,10 +41,12 @@ export class CalendarComponent implements OnInit, OnChanges {
   this.calendarOptions = {
       editable: true,
       eventLimit: false,
+      defaultView: 'basicWeek',
       header: {
         left: 'prev, next today',
         center: 'title',
-        right: 'month, basicWeek, basicDay'
+        right: 'month, basicWeek, agendaDay'
+        // right: 'month, basicWeek, basicDay'
         // right: 'month,agendaWeek,agendaDay,listMonth'
       },
       events: []
@@ -53,50 +56,23 @@ export class CalendarComponent implements OnInit, OnChanges {
   }
 
   updateEvents(): void {
-    let calendarExisting: boolean;
 
     console.log('');
 
     if (this.ucCalendar) {
-      console.log('SUCCESS - ucCalendar existing!');
-      calendarExisting = true;
-    } else {
-      console.log('FAIL - ucCalendar not existing!');
-    }
+      // console.log('SUCCESS - ucCalendar existing!');
 
-    if (calendarExisting) {
       console.log('SUCCESS - Updating EventSource');
       this.ucCalendar.fullCalendar('removeEventSources');
       this.ucCalendar.fullCalendar('addEventSource', this.eventsInput);
     } else {
-      console.log('ERROR - EventSource not updated because ucCalendar not existing.');
+      // console.log('FAIL - ucCalendar not existing!');
     }
-
-    // console.log('');
-    // console.log('ucCalendar:');
-    // if (this.ucCalendar) {
-    //   console.log(this.ucCalendar.);
-    // }
-    // if (this.ucCalendar) {
-    //   this.ucCalendar.fullCalendar('removeEventSources');
-    //   this.ucCalendar.fullCalendar('addEventSource', this.eventsInput);
-    // } else {
-    //   console.log('ucCalendar not existing!');
-    // }
-
-    // setTimeout(() => console.log('*'), 1000);
-    // setTimeout(() => console.log(this.ucCalendar), 1000);
-    // this.ucCalendar.fullCalendar('removeEventSources');
-    // this.ucCalendar.fullCalendar('addEventSource', this.eventsInput);
   }
 
   clearEvents(): void {
     this.calendarOptions.events = [];
 
     console.log('Cleared events');
-  }
-
-  test() {
-    console.log('test');
   }
 }
