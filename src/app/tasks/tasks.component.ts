@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 
 import { DataService } from '../data.service';
 import * as moment from 'moment';
@@ -9,6 +9,8 @@ import * as moment from 'moment';
   styleUrls: ['./tasks.component.scss']
 })
 export class TasksComponent implements OnInit {
+
+  @Output() clickEmitter = new EventEmitter();
 
   constructor(private dataService: DataService) { }
 
@@ -35,5 +37,11 @@ export class TasksComponent implements OnInit {
     };
 
     this.dataService.addEvent(newEvent);
+
+    this.clickEmitter.emit(true);
+  }
+
+  test() {
+    console.log('test');
   }
 }

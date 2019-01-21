@@ -14,8 +14,8 @@
   <div class="col-12">
     
     <div *ngIf="calendarOptions">
-      <ng-fullcalendar #ucCalendar [options]="calendarOptions" [(eventsModel)]="events"></ng-fullcalendar>
-      <!-- <ng-fullcalendar #ucCalendar [options]="calendarOptions" [(eventsModel)]="eventsInput" (eventClick)="eventClick($event.detail)" (eventDrop)="updateEvent($event.detail)" (eventResize)="updateEvent($event.detail)" (clickButton)="clickButton($event.detail)"></ng-fullcalendar> -->
+      <!-- <ng-fullcalendar #ucCalendar [options]="calendarOptions" [(eventsModel)]="eventsInput"></ng-fullcalendar> -->
+      <ng-fullcalendar #ucCalendar [options]="calendarOptions"></ng-fullcalendar>
     </div>
 
   </div>

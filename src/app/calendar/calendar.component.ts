@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Input } from '@angular/core';
+import { Component, OnInit, ViewChild, Input, Output, OnChanges, SimpleChanges, EventEmitter } from '@angular/core';
 
 import { DataService } from '../data.service';
 import { CalendarComponent as ngCalenderComponent } from 'ng-fullcalendar';
@@ -12,20 +12,28 @@ import * as moment from 'moment';
   templateUrl: './calendar.component.html',
   styleUrls: ['./calendar.component.scss']
 })
-export class CalendarComponent implements OnInit {
+export class CalendarComponent implements OnInit, OnChanges {
 
   @ViewChild(ngCalenderComponent) ucCalendar: ngCalenderComponent;
   calendarOptions: Options;
 
   @Input() eventsInput;
-  @Input() eventsInputTwo;
-  events: null;
 
   constructor(private dataService: DataService) { }
 
   ngOnInit() {
     this.createCalendar();
-    this.updateEvents();
+    // this.updateEvents();
+    setTimeout(() => this.updateEvents(), 1000);
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    console.log('ngOnChanges() called!');
+    console.log(changes);
+
+    if (changes['eventsInput']) {
+      this.updateEvents();
+    }
   }
 
   createCalendar(): void {
@@ -40,6 +48,46 @@ export class CalendarComponent implements OnInit {
       },
       events: []
     };
+
+    this.updateEvents();
+  }
+
+  updateEvents(): void {
+    let calendarExisting: boolean;
+
+    console.log('');
+
+    if (this.ucCalendar) {
+      console.log('SUCCESS - ucCalendar existing!');
+      calendarExisting = true;
+    } else {
+      console.log('FAIL - ucCalendar not existing!');
+    }
+
+    if (calendarExisting) {
+      console.log('SUCCESS - Updating EventSource');
+      this.ucCalendar.fullCalendar('removeEventSources');
+      this.ucCalendar.fullCalendar('addEventSource', this.eventsInput);
+    } else {
+      console.log('ERROR - EventSource not updated because ucCalendar not existing.');
+    }
+
+    // console.log('');
+    // console.log('ucCalendar:');
+    // if (this.ucCalendar) {
+    //   console.log(this.ucCalendar.);
+    // }
+    // if (this.ucCalendar) {
+    //   this.ucCalendar.fullCalendar('removeEventSources');
+    //   this.ucCalendar.fullCalendar('addEventSource', this.eventsInput);
+    // } else {
+    //   console.log('ucCalendar not existing!');
+    // }
+
+    // setTimeout(() => console.log('*'), 1000);
+    // setTimeout(() => console.log(this.ucCalendar), 1000);
+    // this.ucCalendar.fullCalendar('removeEventSources');
+    // this.ucCalendar.fullCalendar('addEventSource', this.eventsInput);
   }
 
   clearEvents(): void {
@@ -48,24 +96,7 @@ export class CalendarComponent implements OnInit {
     console.log('Cleared events');
   }
 
-  updateEvents(): void {
-    // this.ucCalendar.fullCalendar('rerenderEvents');
-
-    // this.ucCalendar.fullCalendar('removeEventSources');
-    // this.ucCalendar.fullCalendar('addEventSource', this.eventsInputTwo);
-
-    console.log('');
-    console.log('this.eventsInputTwo before:');
-    console.log(this.eventsInputTwo);
-
-    console.log('this.events before:');
-    console.log(this.events);
-
-    this.events = this.eventsInputTwo;
-
-    console.log('////////////////////');
-
-    console.log('this.events after:');
-    console.log(this.events);
+  test() {
+    console.log('test');
   }
 }
