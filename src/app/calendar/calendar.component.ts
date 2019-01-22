@@ -29,14 +29,21 @@ export class CalendarComponent implements OnInit {
   createCalendar(): void {
   this.calendarOptions = {
       editable: true,
-      eventLimit: false,
-      defaultView: 'basicWeek',
+      eventLimit: true,
+      // defaultView: 'basicWeek',
+      locale: 'da',
+      timeFormat: 'H:mm',
+      slotLabelFormat: 'H:mm',
+      nowIndicator: true,
       header: {
         left: 'prev, next today',
         center: 'title',
-        right: 'month, basicWeek, agendaDay'
-        // right: 'month, basicWeek, basicDay'
-        // right: 'month,agendaWeek,agendaDay,listMonth'
+        right: 'month, basicWeek, agendaDay, listMonth'
+      },
+      views: {
+        basicWeek: {
+          columnFormat: 'ddd DD/MM'
+        }
       },
       events: []
     };

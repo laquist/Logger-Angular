@@ -1,2 +1,8 @@
 @import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 @import "../node_modules/fullcalendar/dist/fullcalendar.min.css";
+
+// Det virker kun hvis jeg skriver der herude. Det virker ikke hvis jeg skriver dette i calendar.component.scss.
+// Undersøg dette senere
+.fc-day-header, .fc-center, .fc-title {
+    text-transform: capitalize!important;
+}
