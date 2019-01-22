@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { DataService } from '../data.service';
 import * as moment from 'moment';
@@ -10,10 +10,17 @@ import * as moment from 'moment';
 })
 export class TasksComponent implements OnInit {
 
+  events: [];
+
   constructor(private dataService: DataService) { }
 
   ngOnInit() {
     this.dataService.createTestData();
+    this.getEvents();
+  }
+
+  getEvents(): void {
+    this.dataService.events.subscribe(events => this.events = events);
   }
 
   completeTask(id: number): void {

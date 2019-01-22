@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Input, Output, OnChanges, SimpleChanges, EventEmitter } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 
 import { DataService } from '../data.service';
 import { CalendarComponent as ngCalenderComponent } from 'ng-fullcalendar';
@@ -12,29 +12,18 @@ import * as moment from 'moment';
   templateUrl: './calendar.component.html',
   styleUrls: ['./calendar.component.scss']
 })
-export class CalendarComponent implements OnInit, OnChanges {
+export class CalendarComponent implements OnInit {
 
   @ViewChild(ngCalenderComponent) ucCalendar: ngCalenderComponent;
   calendarOptions: Options;
 
-  @Input() eventsInput;
-  @Input() twoWayTest;
+  events: [];
 
   constructor(private dataService: DataService) { }
 
   ngOnInit() {
     this.createCalendar();
-    // this.updateEvents();
-    setTimeout(() => this.updateEvents(), 1000);
-  }
-
-  ngOnChanges(changes: SimpleChanges) {
-    console.log('ngOnChanges() called!');
-    console.log(changes);
-
-    if (changes['eventsInput']) {
-      this.updateEvents();
-    }
+    this.getEvents();
   }
 
   createCalendar(): void {
@@ -51,28 +40,22 @@ export class CalendarComponent implements OnInit, OnChanges {
       },
       events: []
     };
+  }
 
-    this.updateEvents();
+  getEvents(): void {
+    this.dataService.events.subscribe(events => {
+      this.events = events;
+      this.updateEvents();
+    });
   }
 
   updateEvents(): void {
-
-    console.log('');
-
     if (this.ucCalendar) {
-      // console.log('SUCCESS - ucCalendar existing!');
-
-      console.log('SUCCESS - Updating EventSource');
+      // console.log('SUCCESS - Updating EventSource');
       this.ucCalendar.fullCalendar('removeEventSources');
-      this.ucCalendar.fullCalendar('addEventSource', this.eventsInput);
+      this.ucCalendar.fullCalendar('addEventSource', this.events);
     } else {
       // console.log('FAIL - ucCalendar not existing!');
     }
-  }
-
-  clearEvents(): void {
-    this.calendarOptions.events = [];
-
-    console.log('Cleared events');
   }
 }
