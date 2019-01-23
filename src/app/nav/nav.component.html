@@ -1,5 +1,20 @@
-<nav class="navbar navbar-dark bg-dark mb-4">
-  <a class="navbar-brand text-white">Logger</a>
+<nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
+  <button class="navbar-toggler" type="button" (click)="isCollapsed = !isCollapsed"
+  [attr.aria-expanded]="!isCollapsed" aria-controls="navbarCollapse" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <a class="navbar-brand mx-auto mx-md-none mr-0 mr-md-3" href="#">Logger</a>
 
-  <button class="btn btn-outline-primary" (click)="this.dataService.logRawEvents()">Log Raw Events</button>
+  <div class="collapse navbar-collapse" id="navbarCollapse" [collapse]="!isCollapsed">
+    <ul class="navbar-nav mr-auto mt-2 mt-md-2">
+      <li class="nav-item active">
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Tasks</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Calendar</a>
+      </li>
+    </ul>
+  </div>
 </nav>

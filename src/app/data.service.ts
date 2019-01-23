@@ -10,7 +10,7 @@ export class DataService {
   tasks: Task[] = [];
 
   data = {
-    events: []
+    events: [],
   };
 
   eventSource = new BehaviorSubject<any>([]);
