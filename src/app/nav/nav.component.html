@@ -1,20 +1,30 @@
+<!-- ** TEMP NOTES ** -->
+<!-- You set the RouterLinkActive directive to a string of classes such as [routerLinkActive]="'active fluffy'" or bind it to a component property that returns such a string. -->
+<!-- Active route links cascade down through each level of the route tree, so parent and child router links can be active at the same time. To override this behavior, you can bind to the [routerLinkActiveOptions] input binding with the { exact: true } expression. By using { exact: true }, a given RouterLink will only be active if its URL is an exact match to the current URL. -->
+
+
 <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
   <button class="navbar-toggler" type="button" (click)="isCollapsed = !isCollapsed"
   [attr.aria-expanded]="!isCollapsed" aria-controls="navbarCollapse" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <a class="navbar-brand mx-auto mx-md-none mr-0 mr-md-3" href="#">Logger</a>
+  <a class="navbar-brand mx-auto mx-md-none mr-0 mr-md-3" routerLink="/">Logger</a>
 
   <div class="collapse navbar-collapse" id="navbarCollapse" [collapse]="!isCollapsed">
     <ul class="navbar-nav mr-auto mt-2 mt-md-2">
-      <li class="nav-item active">
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/home" routerLinkActive="active">Home</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Tasks</a>
+        <a class="nav-link" routerLink="/tasks" routerLinkActive="active">Tasks</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Calendar</a>
+        <a class="nav-link" routerLink="/calendar" routerLinkActive="active">Calendar</a>
       </li>
     </ul>
   </div>
+
+  <!-- TEMP -->
+  <button class="btn btn-secondary" (click)="this.dataService.logRawEvents()">Log Events</button>
+  <button class="btn btn-secondary" (click)="this.dataService.refreshCalendar()">Refresh Calendar</button>
 </nav>

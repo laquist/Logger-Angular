@@ -30,7 +30,7 @@ export class CalendarComponent implements OnInit {
   this.calendarOptions = {
       editable: true,
       eventLimit: true,
-      // defaultView: 'basicWeek',
+      defaultView: 'listYear',
       locale: 'da',
       timeFormat: 'H:mm',
       slotLabelFormat: 'H:mm',
@@ -38,13 +38,12 @@ export class CalendarComponent implements OnInit {
       header: {
         left: 'prev, next today',
         center: 'title',
-        right: 'month, basicWeek, agendaDay, listMonth'
+        right: 'month, basicWeek, agendaDay, listMonth, listYear'
       },
-      views: {
-        basicWeek: {
-          columnFormat: 'ddd DD/MM'
-        }
-      },
+      // buttonText: {
+      //   listMonth: 'list month',
+      //   listYear: 'list year'
+      // },
       events: []
     };
   }

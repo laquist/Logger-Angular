@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Task } from './task';
 import { BehaviorSubject } from 'rxjs';
+import * as moment from 'moment';
 
 @Injectable({
   providedIn: 'root'
@@ -27,6 +28,42 @@ export class DataService {
         new Task(4, 'Øvelse 4', 'Lav 100 armbøjninger')
       );
 
+      if (this.data.events.length === 0) {
+        const newEventOne = {
+          title: this.tasks[0].name,
+          start: moment().format(),
+          description: this.tasks[0].details,
+          taskID: this.tasks[0].id,
+          className: 'task' + this.tasks[0].id,
+        };
+
+        const newEventTwo = {
+          title: this.tasks[1].name,
+          start: moment().subtract(1, 'days').format(),
+          description: this.tasks[1].details,
+          taskID: this.tasks[1].id,
+          className: 'task' + this.tasks[1].id,
+        };
+
+        const newEventThree = {
+          title: this.tasks[2].name,
+          start: moment().subtract(2, 'days').format(),
+          description: this.tasks[2].details,
+          taskID: this.tasks[2].id,
+          className: 'task' + this.tasks[2].id,
+        };
+
+        const newEventFour = {
+          title: this.tasks[3].name,
+          start: moment().subtract(3, 'days').format(),
+          description: this.tasks[3].details,
+          taskID: this.tasks[3].id,
+          className: 'task' + this.tasks[3].id,
+        };
+
+        this.data.events.push(newEventOne, newEventTwo, newEventThree, newEventFour);
+      }
+
       console.log('Created testdata..');
     }
   }
@@ -47,6 +84,10 @@ export class DataService {
   logRawEvents(): void {
     console.log('Raw Events:');
     console.log(this.data.events);
+  }
+
+  refreshCalendar(): void {
+    this.eventSource.next(this.data.events);
   }
 
   // Skal testes
