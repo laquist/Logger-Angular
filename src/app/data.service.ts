@@ -62,6 +62,7 @@ export class DataService {
         };
 
         this.data.events.push(newEventOne, newEventTwo, newEventThree, newEventFour);
+        this.refreshCalendar();
       }
 
       console.log('Created testdata..');
@@ -78,7 +79,7 @@ export class DataService {
     }
 
     this.data.events.push(event);
-    this.eventSource.next(this.data.events);
+    this.refreshCalendar();
   }
 
   logRawEvents(): void {
@@ -94,27 +95,5 @@ export class DataService {
   // removeEvent(id: number): void {
   //   const index = this.events.findIndex(element => element.id === id);
   //   this.events.splice(index, 1);
-  // }
-
-  // getAllCompleted(): void {
-  //   this.tasks.forEach(task => {
-  //     task.completed.forEach(date => {
-  //       const completeString = task.name + ' completed at: ' + date.toString();
-
-  //       const formatted = completeString.split(' GMT')[0];
-
-  //       // Logs result
-  //       console.log(formatted);
-  //     });
-  //   });
-  // }
-
-
-
-  // TEST
-  // Prøv at gøre det med obserables, som i dette eksempel:
-  // https://github.com/ng-fullcalendar/ng-fullcalendar-demo/tree/master/src/app
-  // getEventsTest(): Observable<any> {
-  //   return of(this.events);
   // }
 }

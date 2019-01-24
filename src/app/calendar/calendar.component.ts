@@ -1,10 +1,9 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 
 import { DataService } from '../data.service';
 import { CalendarComponent as ngCalenderComponent } from 'ng-fullcalendar';
 import { Options } from 'fullcalendar';
 
-import * as $ from 'jquery';
 import * as moment from 'moment';
 
 @Component({
@@ -18,6 +17,7 @@ export class CalendarComponent implements OnInit {
   calendarOptions: Options;
 
   events: [];
+  doubleChecked = false;
 
   constructor(private dataService: DataService) { }
 
@@ -27,7 +27,7 @@ export class CalendarComponent implements OnInit {
   }
 
   createCalendar(): void {
-  this.calendarOptions = {
+    this.calendarOptions = {
       editable: true,
       eventLimit: true,
       defaultView: 'listYear',
@@ -38,12 +38,8 @@ export class CalendarComponent implements OnInit {
       header: {
         left: 'prev, next today',
         center: 'title',
-        right: 'month, basicWeek, agendaDay, listMonth, listYear'
+        right: 'month, basicWeek, agendaDay, listYear'
       },
-      // buttonText: {
-      //   listMonth: 'list month',
-      //   listYear: 'list year'
-      // },
       events: []
     };
   }
@@ -57,10 +53,20 @@ export class CalendarComponent implements OnInit {
 
   updateEvents(): void {
     if (this.ucCalendar) {
+      console.log('ucCalendar is TRUE');
       // console.log('SUCCESS - Updating EventSource');
       this.ucCalendar.fullCalendar('removeEventSources');
       this.ucCalendar.fullCalendar('addEventSource', this.events);
+
+      console.log('Updated events!');
     } else {
+      if (!this.doubleChecked) {
+        console.log('ucCalendar is FALSE!');
+        setTimeout(() => this.updateEvents(), 100);
+
+        this.doubleChecked = true;
+        console.log('Double checking...');
+      }
       // console.log('FAIL - ucCalendar not existing!');
     }
   }
