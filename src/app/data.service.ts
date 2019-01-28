@@ -70,7 +70,7 @@ export class DataService {
         this.refreshCalendar();
       }
 
-      console.log('Created testdata..');
+      // console.log('Created testdata..');
     }
   }
 

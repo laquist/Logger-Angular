@@ -1,9 +1,14 @@
 <div class="row">
 
   <div class="col-12">
-    
+
     <div *ngIf="calendarOptions">
-      <ng-fullcalendar #ucCalendar [options]="calendarOptions"></ng-fullcalendar>
+      <ng-fullcalendar 
+      #ucCalendar 
+      [options]="calendarOptions"
+      (initialized)="getEvents($event)"
+      [(eventsModel)]="events"
+      ></ng-fullcalendar>
     </div>
 
   </div>
