@@ -19,6 +19,9 @@ export class CalendarComponent implements OnInit {
   events: [];
   doubleChecked = false;
 
+  // TESTS:
+  // Source
+
   constructor(private dataService: DataService) { }
 
   ngOnInit() {
@@ -69,5 +72,9 @@ export class CalendarComponent implements OnInit {
       }
       // console.log('FAIL - ucCalendar not existing!');
     }
+  }
+
+  tester(): void {
+    console.log('TEST');
   }
 }
