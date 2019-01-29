@@ -6,11 +6,11 @@
 <!-- <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4"> -->
 <!-- shadow p-3 mb-5 bg-white rounded -->
 <nav class="navbar navbar-dark bg-dark mb-4">
-<button class="navbar-toggler" type="button" (click)="isCollapsed = !isCollapsed"
+  <button class="navbar-toggler" type="button" (click)="isCollapsed = !isCollapsed"
   [attr.aria-expanded]="!isCollapsed" aria-controls="navbarCollapse" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <a class="navbar-brand mx-auto mx-md-none mr-0 mr-md-3" routerLink="/">Logger</a>
+  <a class="navbar-brand ml-3 mr-auto" routerLink="/">Logger</a>
 
   <div class="collapse navbar-collapse" id="navbarCollapse" [collapse]="!isCollapsed">
     <ul class="navbar-nav mr-auto">
@@ -18,7 +18,7 @@
         <a class="nav-link" routerLink="/home" routerLinkActive="active">Home</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" routerLink="/tasks" routerLinkActive="active">Tasks</a>
+        <a class="nav-link" routerLink="/taskmanager" routerLinkActive="active">Manage Tasks</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" routerLink="/calendar" routerLinkActive="active">Calendar</a>
@@ -27,6 +27,7 @@
   </div>
 
   <!-- TEMP -->
-  <button class="btn btn-secondary" (click)="this.dataService.logRawEvents()">Log Events</button>
-  <button class="btn btn-secondary" (click)="this.dataService.refreshCalendar()">Refresh Calendar</button>
+  <div>
+    <button class="btn btn-secondary mx-1" (click)="this.dataService.refreshCalendar()">Refresh Calendar</button>
+  </div>
 </nav>

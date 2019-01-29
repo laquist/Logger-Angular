@@ -4,10 +4,11 @@ import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { TasksComponent } from './tasks/tasks.component';
 import { CalendarComponent } from './calendar/calendar.component';
+import { TaskManagerComponent } from './task-manager/task-manager.component';
 
 const appRoutes: Routes = [
   { path: 'home', component: HomeComponent },
-  { path: 'tasks', component: TasksComponent },
+  { path: 'taskmanager', component: TaskManagerComponent },
   { path: 'task/:id', component: TasksComponent },
   { path: 'calendar', component: CalendarComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full' },

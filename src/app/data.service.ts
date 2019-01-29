@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Task } from './task';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import * as moment from 'moment';
 
 @Injectable({
@@ -8,10 +8,9 @@ import * as moment from 'moment';
 })
 export class DataService {
 
-  tasks: Task[] = [];
-
   data = {
     events: [],
+    tasks: []
   };
 
   // Test denne, skal denne have this.data.events som parameter?
@@ -22,57 +21,69 @@ export class DataService {
   eventSource = new BehaviorSubject<any>(this.data.events);
   events = this.eventSource.asObservable();
 
+  tasksSource = new BehaviorSubject<any>(this.data.tasks);
+  // tasks = this.tasksSource.asObservable();
+
   constructor() { }
 
   createTestData(): void {
-    if (this.tasks.length === 0) {
-      this.tasks.push(
-        new Task(1, 'Øvelse 1', 'Løb til Esbjerg'),
-        new Task(2, 'Øvelse 2', 'Hop til Falster'),
-        new Task(3, 'Øvelse 3', 'Slik din albue'),
-        new Task(4, 'Øvelse 4', 'Lav 100 armbøjninger')
+    if (this.data.tasks.length === 0) {
+      this.data.tasks.push(
+        new Task(1, 'Task 1', 'Løb til Esbjerg'),
+        new Task(2, 'Task 2', 'Hop til Falster'),
+        new Task(3, 'Task 3', 'Slik din albue'),
+        new Task(4, 'Task 4', 'Lav 100 armbøjninger')
       );
 
       if (this.data.events.length === 0) {
         const newEventOne = {
-          title: this.tasks[0].name,
+          title: this.data.tasks[0].name,
           start: moment().format(),
-          description: this.tasks[0].details,
-          taskID: this.tasks[0].id,
-          className: 'task' + this.tasks[0].id,
+          description: this.data.tasks[0].details,
+          taskID: this.data.tasks[0].id,
+          className: 'task' + this.data.tasks[0].id,
         };
 
         const newEventTwo = {
-          title: this.tasks[1].name,
+          title: this.data.tasks[1].name,
           start: moment().subtract(1, 'days').format(),
-          description: this.tasks[1].details,
-          taskID: this.tasks[1].id,
-          className: 'task' + this.tasks[1].id,
+          description: this.data.tasks[1].details,
+          taskID: this.data.tasks[1].id,
+          className: 'task' + this.data.tasks[1].id,
         };
 
         const newEventThree = {
-          title: this.tasks[2].name,
+          title: this.data.tasks[2].name,
           start: moment().subtract(2, 'days').format(),
-          description: this.tasks[2].details,
-          taskID: this.tasks[2].id,
-          className: 'task' + this.tasks[2].id,
+          description: this.data.tasks[2].details,
+          taskID: this.data.tasks[2].id,
+          className: 'task' + this.data.tasks[2].id,
         };
 
         const newEventFour = {
-          title: this.tasks[3].name,
+          title: this.data.tasks[3].name,
           start: moment().subtract(3, 'days').format(),
-          description: this.tasks[3].details,
-          taskID: this.tasks[3].id,
-          className: 'task' + this.tasks[3].id,
+          description: this.data.tasks[3].details,
+          taskID: this.data.tasks[3].id,
+          className: 'task' + this.data.tasks[3].id,
         };
 
-        this.data.events.push(newEventOne, newEventTwo, newEventThree, newEventFour);
-        this.refreshCalendar();
-      }
 
-      // console.log('Created testdata..');
+        if (this.data.events.length === 0) {
+          this.data.events.push(newEventOne, newEventTwo, newEventThree, newEventFour);
+          this.refreshCalendar();
+        }
+      }
     }
   }
+
+  getTasks(): Observable<Task[]> {
+    return this.tasksSource.asObservable();
+  }
+
+  // getEvents(): Observable<any> {
+  //   return this.eventSource.asObservable();
+  // }
 
   addEvent(event: any): void {
     // Gives the event an id
@@ -87,13 +98,26 @@ export class DataService {
     this.refreshCalendar();
   }
 
-  logRawEvents(): void {
-    console.log('Raw Events:');
-    console.log(this.data.events);
+  // Test denne
+  addTask(newTaskInfo): void {
+    // Gets next ID
+    const nextID = this.data.tasks[this.data.tasks.length - 1].id + 1;
+
+    const newTask = new Task(nextID, newTaskInfo.name, newTaskInfo.details);
+
+    this.data.tasks.push(newTask);
+
+    // Updates the Observable, and gives new info to all subscribed
+    this.updateTasks();
   }
 
+  // Skift navn til update events eller sådan noget
   refreshCalendar(): void {
     this.eventSource.next(this.data.events);
+  }
+
+  updateTasks(): void {
+    this.tasksSource.next(this.data.tasks);
   }
 
   // Skal testes

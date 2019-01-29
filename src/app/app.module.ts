@@ -13,6 +13,7 @@ import { CalendarComponent } from './calendar/calendar.component';
 
 import { FullCalendarModule } from 'ng-fullcalendar';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
+import { TaskManagerComponent } from './task-manager/task-manager.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { CollapseModule } from 'ngx-bootstrap/collapse';
     TasksComponent,
     NavComponent,
     CalendarComponent,
-    HomeComponent
+    HomeComponent,
+    TaskManagerComponent
   ],
   imports: [
     BrowserModule,

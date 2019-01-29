@@ -1,7 +1,7 @@
 <div class="row mb-5">
   
-  <div id="tasksContainer" class="col d-flex justify-content-around" *ngFor="let task of dataService.tasks">
-    <button type="button" class="btn btn-outline-primary d-block mx-s" (click)="completeTask(task.id)">{{ task.name }}</button>
+  <div id="tasksContainer" class="col d-flex justify-content-around">
+    <button type="button" class="btn btn-outline-primary d-block mx-s" (click)="completeTask(task.id)" *ngFor="let task of dataService.data.tasks">{{ task.name }}</button>
   </div>
   
 </div>

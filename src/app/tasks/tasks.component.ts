@@ -23,10 +23,11 @@ export class TasksComponent implements OnInit {
     this.dataService.events.subscribe(events => this.events = events);
   }
 
+  // Burde denne være under DataService, ligesom addTask() ?
   completeTask(id: number): void {
     // Finds the task from the taskID
-    const index = this.dataService.tasks.findIndex(element => element.id === id);
-    const task = this.dataService.tasks[index];
+    const index = this.dataService.data.tasks.findIndex(element => element.id === id);
+    const task = this.dataService.data.tasks[index];
 
     // Completes the task, and sends the Date and Time
     const completionDate = moment();
