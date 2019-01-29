@@ -3,7 +3,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { DataService } from '../data.service';
 import { CalendarComponent as ngCalenderComponent } from 'ng-fullcalendar';
 import { Options } from 'fullcalendar';
-// import * as moment from 'moment';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-calendar',
@@ -16,7 +16,7 @@ export class CalendarComponent implements OnInit {
   calendarOptions: Options;
 
   events;
-  doubleChecked = false;
+  newEvents;
 
   constructor(private dataService: DataService) { }
 
@@ -49,6 +49,32 @@ export class CalendarComponent implements OnInit {
 
       // console.log('ucCalendar renderEvents() called (from getEvents() subscription)');
     });
+  }
+
+  tester(): void {
+    this.newEvents = this.ucCalendar.eventsModel;
+    console.log('');
+    console.log('newEvents:');
+    console.log(this.newEvents);
+  }
+
+  testerTwo(): void {
+    this.tester();
+
+    this.newEvents.forEach(element => {
+      console.log(element.start._d);
+    });
+  }
+
+  testerThree(event): void {
+    console.log('');
+    console.log('testerThree():');
+    console.log(event);
+    const time = moment(event.event.start);
+    console.log('time:');
+    console.log(time);
+    console.log('formatted:');
+    console.log(time.format('DD-MM-YYYY HH:mm'));
   }
 
   // eventFired(event): void {
