@@ -1,12 +1,49 @@
+<!-- 
+  Hvad skal denne kunne:
+  - Den skal vise en liste af tasks,
+    - som skal have:
+      - delete knap
+      - edit knap
+      - clone knap?
+  - Den skal have en New Task knap
+    - som åbner en modal eller lign, med felter til at udfylde properties
+      - denne skal tjekke om der findes en task med samme navn
+  - Der skal være en knap til at Create Custom List
+    - som skal kunne oprette en custom list, med de (allerede eksisterende) tasks som man vælger.
+    - det kan godt være at dette skal deles ud i et component for sig selv, men knappen skal stadig være under dette component.
+  - Den skal vise en liste af de custom lists man nu evt har, og ellers skal der stå: 'No custom lists', eller sådan noget.
+ -->
+
 <div class="row">
   <div class="col-12 mb-4">
     <button class="btn btn-secondary mx-1">New Task</button>
     <button class="btn btn-secondary mx-1" (click)="tester()">Log data</button>
   </div>
   
-  <div class="col-12">
+  <!-- <div class="col-12">
     <ul>
       <li *ngFor="let task of tasks">{{ task.name }}</li>
     </ul>
+  </div> -->
+  <div class="col-12">
+
+    <ul class="list-group">
+      <li id="listHeader" class="list-group-item effect8">
+        <h5 id="tasksHeader" class="m-0">Tasks:</h5>
+      </li>
+      <li class="list-group-item">
+        <ul class="list-group list-group-flush">
+          <!-- <li class="list-group-item" *ngFor="let task of tasks">{{ task.name }}</li> -->
+          <li id="listItem" class="list-group-item d-flex justify-content-between" *ngFor="let task of tasks">
+            <div>{{ task.name }}</div>
+            <div>
+              <fa-icon class="mx-3" [icon]="['fas', 'tools']"></fa-icon>
+              <fa-icon class="ml-3" [icon]="['fas', 'trash-alt']"></fa-icon>
+            </div>
+          </li>
+        </ul>
+      </li>
+    </ul>
+
   </div>
 </div>

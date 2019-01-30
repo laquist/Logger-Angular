@@ -16,13 +16,9 @@ export class DataService {
   // Test denne, skal denne have this.data.events som parameter?
   // Hvis nu man henter data fra DB eller localStorage, så skal den data jo være med
   // Eller skal en metode adde hver enkelt fra DB / localStorage?
-  // --
-  // eventSource = new BehaviorSubject<any>([]);
-  eventSource = new BehaviorSubject<any>(this.data.events);
-  // events = this.eventSource.asObservable();
 
+  eventSource = new BehaviorSubject<any>(this.data.events);
   tasksSource = new BehaviorSubject<any>(this.data.tasks);
-  // tasks = this.tasksSource.asObservable();
 
   constructor() { }
 
