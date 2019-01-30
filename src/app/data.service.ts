@@ -19,7 +19,7 @@ export class DataService {
   // --
   // eventSource = new BehaviorSubject<any>([]);
   eventSource = new BehaviorSubject<any>(this.data.events);
-  events = this.eventSource.asObservable();
+  // events = this.eventSource.asObservable();
 
   tasksSource = new BehaviorSubject<any>(this.data.tasks);
   // tasks = this.tasksSource.asObservable();
@@ -71,7 +71,7 @@ export class DataService {
 
         if (this.data.events.length === 0) {
           this.data.events.push(newEventOne, newEventTwo, newEventThree, newEventFour);
-          this.refreshCalendar();
+          this.updateEvents();
         }
       }
     }
@@ -81,9 +81,9 @@ export class DataService {
     return this.tasksSource.asObservable();
   }
 
-  // getEvents(): Observable<any> {
-  //   return this.eventSource.asObservable();
-  // }
+  getEvents(): Observable<any> {
+    return this.eventSource.asObservable();
+  }
 
   addEvent(event: any): void {
     // Gives the event an id
@@ -95,7 +95,7 @@ export class DataService {
     }
 
     this.data.events.push(event);
-    this.refreshCalendar();
+    this.updateEvents();
   }
 
   // Test denne
@@ -111,8 +111,7 @@ export class DataService {
     this.updateTasks();
   }
 
-  // Skift navn til update events eller sådan noget
-  refreshCalendar(): void {
+  updateEvents(): void {
     this.eventSource.next(this.data.events);
   }
 

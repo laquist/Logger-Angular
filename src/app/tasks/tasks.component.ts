@@ -20,7 +20,7 @@ export class TasksComponent implements OnInit {
   }
 
   getEvents(): void {
-    this.dataService.events.subscribe(events => this.events = events);
+    this.dataService.getEvents().subscribe(events => this.events = events);
   }
 
   // Burde denne være under DataService, ligesom addTask() ?

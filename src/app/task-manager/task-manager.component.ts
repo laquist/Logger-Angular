@@ -15,7 +15,10 @@ export class TaskManagerComponent implements OnInit {
 
   ngOnInit() {
     this.dataService.createTestData();
+    this.getTasks();
+  }
 
+  getTasks(): void {
     this.dataService.getTasks().subscribe(tasks => this.tasks = tasks);
   }
 

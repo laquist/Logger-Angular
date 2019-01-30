@@ -15,12 +15,13 @@ export class CalendarComponent implements OnInit {
   @ViewChild(ngCalenderComponent) ucCalendar: ngCalenderComponent;
   calendarOptions: Options;
 
-  events;
-  newEvents;
+  events: [];
+  newEvents; // Test
 
   constructor(private dataService: DataService) { }
 
   ngOnInit() {
+    this.dataService.createTestData();
     this.createCalendar();
   }
 
@@ -33,6 +34,7 @@ export class CalendarComponent implements OnInit {
       timeFormat: 'H:mm',
       slotLabelFormat: 'H:mm',
       nowIndicator: true,
+      aspectRatio: 2,
       header: {
         left: 'prev, next today',
         center: 'title',
@@ -43,11 +45,9 @@ export class CalendarComponent implements OnInit {
   }
 
   getEvents(): void {
-    this.dataService.events.subscribe(events => {
+    this.dataService.getEvents().subscribe(events => {
       this.events = events;
       this.ucCalendar.renderEvents(this.events);
-
-      // console.log('ucCalendar renderEvents() called (from getEvents() subscription)');
     });
   }
 
