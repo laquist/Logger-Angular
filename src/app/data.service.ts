@@ -42,6 +42,7 @@ export class DataService {
           description: this.data.tasks[0].details,
           taskID: this.data.tasks[0].id,
           className: 'task' + this.data.tasks[0].id,
+          eventID: 1
         };
 
         const newEventTwo = {
@@ -50,6 +51,7 @@ export class DataService {
           description: this.data.tasks[1].details,
           taskID: this.data.tasks[1].id,
           className: 'task' + this.data.tasks[1].id,
+          eventID: 2
         };
 
         const newEventThree = {
@@ -58,6 +60,7 @@ export class DataService {
           description: this.data.tasks[2].details,
           taskID: this.data.tasks[2].id,
           className: 'task' + this.data.tasks[2].id,
+          eventID: 3
         };
 
         const newEventFour = {
@@ -66,8 +69,8 @@ export class DataService {
           description: this.data.tasks[3].details,
           taskID: this.data.tasks[3].id,
           className: 'task' + this.data.tasks[3].id,
+          eventID: 4
         };
-
 
         if (this.data.events.length === 0) {
           this.data.events.push(newEventOne, newEventTwo, newEventThree, newEventFour);
@@ -87,12 +90,7 @@ export class DataService {
 
   addEvent(event: any): void {
     // Gives the event an id
-    if (this.data.events.length !== 0) {
-      const nextID = this.data.events[this.data.events.length - 1].id + 1;
-      event.id = nextID;
-    } else {
-      event.id = 1;
-    }
+    event.eventID = this.findNextID(this.data.events, 'eventID');
 
     this.data.events.push(event);
     this.updateEvents();
@@ -100,8 +98,8 @@ export class DataService {
 
   // Test denne
   addTask(newTaskInfo): void {
-    // Gets next ID
-    const nextID = this.data.tasks[this.data.tasks.length - 1].id + 1;
+    // Gives the task an id
+    const nextID = this.findNextID(this.data.tasks, 'id');
 
     const newTask = new Task(nextID, newTaskInfo.name, newTaskInfo.details);
 
@@ -117,6 +115,17 @@ export class DataService {
 
   updateTasks(): void {
     this.tasksSource.next(this.data.tasks);
+  }
+
+  findNextID(array: any[], propertyToFind): number {
+    // Den fejler, hvis propertien ikke findes på det sidste object i array'et.
+    // ToDo: Gør at denne fejl bliver catch'et og løst et sted.
+
+    if (array.length !== 0) {
+      return array[array.length - 1][propertyToFind] + 1;
+    } else {
+      return 1;
+    }
   }
 
   // Skal testes

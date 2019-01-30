@@ -22,4 +22,10 @@ export class TaskManagerComponent implements OnInit {
     this.dataService.getTasks().subscribe(tasks => this.tasks = tasks);
   }
 
+  tester(): void {
+    console.log('events');
+    console.log(this.dataService.data.events);
+    console.log('tasks');
+    console.log(this.dataService.data.tasks);
+  }
 }
