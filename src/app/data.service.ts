@@ -37,7 +37,8 @@ export class DataService {
           start: moment().format(),
           description: this.data.tasks[0].details,
           taskID: this.data.tasks[0].id,
-          className: 'task' + this.data.tasks[0].id,
+          // className: ['task' + this.data.tasks[0].id, 'event'],
+          className: ['event'],
           eventID: 1
         };
 
@@ -46,7 +47,8 @@ export class DataService {
           start: moment().subtract(1, 'days').format(),
           description: this.data.tasks[1].details,
           taskID: this.data.tasks[1].id,
-          className: 'task' + this.data.tasks[1].id,
+          // className: 'task' + this.data.tasks[1].id,
+          className: ['event'],
           eventID: 2
         };
 
@@ -55,7 +57,8 @@ export class DataService {
           start: moment().subtract(2, 'days').format(),
           description: this.data.tasks[2].details,
           taskID: this.data.tasks[2].id,
-          className: 'task' + this.data.tasks[2].id,
+          // className: 'task' + this.data.tasks[2].id,
+          className: ['event'],
           eventID: 3
         };
 
@@ -64,7 +67,8 @@ export class DataService {
           start: moment().subtract(3, 'days').format(),
           description: this.data.tasks[3].details,
           taskID: this.data.tasks[3].id,
-          className: 'task' + this.data.tasks[3].id,
+          // className: 'task' + this.data.tasks[3].id,
+          className: ['event'],
           eventID: 4
         };
 
@@ -125,10 +129,10 @@ export class DataService {
   }
 
   // Skal testes
-  // removeEvent(id: number): void {
-  //   const index = this.events.findIndex(element => element.eventID === id);
-  //   this.events.splice(index, 1);
-  // }
+  removeEvent(id: number): void {
+    const index = this.data.events.findIndex(element => element.eventID === id);
+    this.data.events.splice(index, 1);
+  }
 
   removeTask(id: number): void {
     const index = this.data.tasks.findIndex(element => element.id === id);

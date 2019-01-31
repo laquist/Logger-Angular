@@ -1,16 +1,20 @@
 <div class="row">
   
   <div class="col-12 mb-3">
-    
     <div id="calenderContainer" *ngIf="calendarOptions">
       <ng-fullcalendar 
       #ucCalendar 
       [options]="calendarOptions"
-      (initialized)="getEvents($event)"
       [(eventsModel)]="events"
-      (eventDrop)="testerThree($event.detail)"
+      (initialized)="getEvents($event)"
+      (eventClick)="tester($event.detail)"
       ></ng-fullcalendar>
     </div>
-    
   </div>
+
+  <div class="col-12">
+    <div class="event"><p>test</p></div>
+  </div>
+  
+  
 </div>

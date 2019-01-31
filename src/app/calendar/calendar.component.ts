@@ -16,7 +16,6 @@ export class CalendarComponent implements OnInit {
   calendarOptions: Options;
 
   events: [];
-  newEvents; // Test
 
   constructor(private dataService: DataService) { }
 
@@ -27,7 +26,7 @@ export class CalendarComponent implements OnInit {
 
   createCalendar(): void {
     this.calendarOptions = {
-      editable: true,
+      editable: false,
       eventLimit: true,
       defaultView: 'listYear',
       locale: 'da',
@@ -51,35 +50,9 @@ export class CalendarComponent implements OnInit {
     });
   }
 
-  // tester(): void {
-  //   this.newEvents = this.ucCalendar.eventsModel;
-  //   console.log('');
-  //   console.log('newEvents:');
-  //   console.log(this.newEvents);
-  // }
+  tester(event): void {
+    console.log('Event Clicked!');
+    console.log(event);
+  }
 
-  // testerTwo(): void {
-  //   this.tester();
-
-  //   this.newEvents.forEach(element => {
-  //     console.log(element.start._d);
-  //   });
-  // }
-
-  // testerThree(event): void {
-  //   console.log('');
-  //   console.log('testerThree():');
-  //   console.log(event);
-  //   const time = moment(event.event.start);
-  //   console.log('time:');
-  //   console.log(time);
-  //   console.log('formatted:');
-  //   console.log(time.format('DD-MM-YYYY HH:mm'));
-  // }
-
-  // eventFired(event): void {
-  //   console.log('');
-  //   console.log('eventFired()');
-  //   console.log(event);
-  // }
 }
