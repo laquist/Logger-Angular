@@ -126,7 +126,12 @@ export class DataService {
 
   // Skal testes
   // removeEvent(id: number): void {
-  //   const index = this.events.findIndex(element => element.id === id);
+  //   const index = this.events.findIndex(element => element.eventID === id);
   //   this.events.splice(index, 1);
   // }
+
+  removeTask(id: number): void {
+    const index = this.data.tasks.findIndex(element => element.id === id);
+    this.data.tasks.splice(index, 1);
+  }
 }

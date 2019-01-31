@@ -13,7 +13,5 @@ export class Task {
 
     complete(timestamp): void {
         this.completed.push(timestamp);
-
-        // console.log('Completed ' + this.name);
     }
 }

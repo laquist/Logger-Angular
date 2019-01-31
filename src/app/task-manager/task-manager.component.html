@@ -38,7 +38,7 @@
             <div>{{ task.name }}</div>
             <div>
               <fa-icon class="mx-3" [icon]="['fas', 'tools']"></fa-icon>
-              <fa-icon class="ml-3" [icon]="['fas', 'trash-alt']"></fa-icon>
+              <fa-icon class="ml-3" [icon]="['fas', 'trash-alt']" (click)="deleteTask(task.id)"></fa-icon>
             </div>
           </li>
         </ul>
