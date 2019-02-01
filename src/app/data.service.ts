@@ -138,4 +138,11 @@ export class DataService {
     const index = this.data.tasks.findIndex(element => element.id === id);
     this.data.tasks.splice(index, 1);
   }
+
+  logData(): void {
+    console.log('events');
+    console.log(this.data.events);
+    console.log('tasks');
+    console.log(this.data.tasks);
+  }
 }

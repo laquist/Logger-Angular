@@ -1,11 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import { Router } from '@angular/router';
-
+import { FormsModule }   from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
 
+import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { NavComponent } from './nav/nav.component';
 import { TasksComponent } from './tasks/tasks.component';
@@ -13,7 +11,10 @@ import { CalendarComponent } from './calendar/calendar.component';
 import { TaskManagerComponent } from './task-manager/task-manager.component';
 
 import { FullCalendarModule } from 'ng-fullcalendar';
+
 import { CollapseModule } from 'ngx-bootstrap/collapse';
+import { ModalModule } from 'ngx-bootstrap/modal';
+
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faTools, faTrashAlt } from '@fortawesome/free-solid-svg-icons'; // Add Icons Here
@@ -29,10 +30,12 @@ import { faTools, faTrashAlt } from '@fortawesome/free-solid-svg-icons'; // Add 
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     AppRoutingModule,
     FullCalendarModule,
     CollapseModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    ModalModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

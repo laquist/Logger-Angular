@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+
 import { DataService } from '../data.service';
 import { Task } from '../task';
+
 
 @Component({
   selector: 'app-task-manager',
@@ -9,27 +12,37 @@ import { Task } from '../task';
 })
 export class TaskManagerComponent implements OnInit {
 
-  tasks: Task[];
+  modalRef: BsModalRef;
 
-  constructor(private dataService: DataService) { }
+  tasks: Task[];
+  newTaskModel = {
+    name: '',
+    details: ''
+  }
+
+  constructor(
+    private dataService: DataService,
+    private modalService: BsModalService
+    ) { }
 
   ngOnInit() {
     this.dataService.createTestData();
     this.getTasks();
   }
 
+  openModal(template: TemplateRef<any>): void {
+    this.modalRef = this.modalService.show(template);
+  }
+
   getTasks(): void {
     this.dataService.getTasks().subscribe(tasks => this.tasks = tasks);
   }
 
-  deleteTask(id: number): void {
-    this.dataService.removeTask(id);
+  createTask(newTaskModel): void {
+    this.dataService.addTask(newTaskModel);
   }
 
-  tester(): void {
-    console.log('events');
-    console.log(this.dataService.data.events);
-    console.log('tasks');
-    console.log(this.dataService.data.tasks);
+  deleteTask(id: number): void {
+    this.dataService.removeTask(id);
   }
 }
