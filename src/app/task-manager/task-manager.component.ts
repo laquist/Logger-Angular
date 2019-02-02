@@ -15,10 +15,14 @@ export class TaskManagerComponent implements OnInit {
   modalRef: BsModalRef;
 
   tasks: Task[];
-  newTaskModel = {
+  taskFormModel = {
     name: '',
-    details: ''
+    details: '',
+    id: null
   }
+
+  edit = false;
+  formSubmitBtnText = 'Submit';
 
   constructor(
     private dataService: DataService,
@@ -30,7 +34,22 @@ export class TaskManagerComponent implements OnInit {
     this.getTasks();
   }
 
-  openModal(template: TemplateRef<any>): void {
+  openModal(template: TemplateRef<any>, fieldsModel): void {
+
+    if (fieldsModel) {
+      this.taskFormModel.name = fieldsModel.name;
+      this.taskFormModel.details = fieldsModel.details;
+      this.taskFormModel.id = fieldsModel.id;
+      this.edit = true;
+      this.formSubmitBtnText = 'Edit';
+    }
+    else {
+      this.taskFormModel.name = '';
+      this.taskFormModel.details = '';
+      this.edit = false;
+      this.formSubmitBtnText = 'Submit';
+    }
+
     this.modalRef = this.modalService.show(template);
   }
 
@@ -38,11 +57,28 @@ export class TaskManagerComponent implements OnInit {
     this.dataService.getTasks().subscribe(tasks => this.tasks = tasks);
   }
 
-  createTask(newTaskModel): void {
-    this.dataService.addTask(newTaskModel);
+  submit(taskInfo, edit): void {
+    if (edit) {
+      this.editTask(taskInfo);
+    }
+    else {
+      this.createTask(taskInfo);
+    }
+  }
+
+  createTask(newTaskInfo): void {
+    this.dataService.addTask(newTaskInfo);
   }
 
   deleteTask(id: number): void {
     this.dataService.removeTask(id);
+  }
+
+  editTask(taskInfo): void {
+    const index = this.tasks.findIndex(element => element.id === taskInfo.id);
+
+    if (this.tasks[index].name !== taskInfo.name || this.tasks[index].details !== taskInfo.details) {
+      this.dataService.editTask(taskInfo);
+    }
   }
 }

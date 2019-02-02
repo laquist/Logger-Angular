@@ -28,7 +28,7 @@ export class CalendarComponent implements OnInit {
     this.calendarOptions = {
       editable: false,
       eventLimit: true,
-      defaultView: 'listYear',
+      defaultView: 'basicWeek',
       locale: 'da',
       timeFormat: 'H:mm',
       slotLabelFormat: 'H:mm',
@@ -37,7 +37,12 @@ export class CalendarComponent implements OnInit {
       header: {
         left: 'prev, next today',
         center: 'title',
-        right: 'month, basicWeek, agendaDay, listYear'
+        right: 'month, basicWeek, listYear'
+      },
+      views: {
+        basicWeek: {
+          columnFormat: 'MMM DD/MM'
+        }
       },
       events: []
     };

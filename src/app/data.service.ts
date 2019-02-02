@@ -139,6 +139,16 @@ export class DataService {
     this.data.tasks.splice(index, 1);
   }
 
+  editTask(taskInfo): void {
+    const index = this.data.tasks.findIndex(element => element.id === taskInfo.id);
+    console.log('editTask -> BEFORE');
+    console.log(this.data.tasks[index]);
+    this.data.tasks[index].name = taskInfo.name;
+    this.data.tasks[index].details = taskInfo.details;
+    console.log('editTask -> AFTER');
+    console.log(this.data.tasks[index]);
+  }
+
   logData(): void {
     console.log('events');
     console.log(this.data.events);

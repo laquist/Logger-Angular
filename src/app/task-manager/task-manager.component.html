@@ -1,13 +1,4 @@
 <!-- 
-  Hvad skal denne kunne:
-  - Den skal vise en liste af tasks,
-    - som skal have:
-      - delete knap
-      - edit knap
-      - clone knap?
-  - Den skal have en New Task knap
-    - som åbner en modal eller lign, med felter til at udfylde properties
-      - denne skal tjekke om der findes en task med samme navn
   - Der skal være en knap til at Create Custom List
     - som skal kunne oprette en custom list, med de (allerede eksisterende) tasks som man vælger.
     - det kan godt være at dette skal deles ud i et component for sig selv, men knappen skal stadig være under dette component.
@@ -15,23 +6,34 @@
  -->
 
 <div class="row">
-  <div class="col-12 mb-4">
-    <button class="btn btn-secondary mx-1" (click)="openModal(modal)">New Task</button>
-  </div>
 
   <div class="col-12">
     <ul class="list-group">
-      <li id="listHeader" class="list-group-item effect8">
-        <h5 id="tasksHeader" class="m-0">Tasks:</h5>
+      <li id="listHeader" class="list-group-item d-flex justify-content-between">
+        <h5 id="tasksHeader" class="my-auto">Tasks:</h5>
+        <button class="btn btn-danger mx-1" (click)="openModal(modal, undefined)">New Task</button>
       </li>
       <li class="list-group-item">
         <ul class="list-group list-group-flush">
-          <li id="listItem" class="list-group-item d-flex justify-content-between" *ngFor="let task of tasks">
-            <div>{{ task.name }}</div>
-            <div>
-              <fa-icon class="mx-3" [icon]="['fas', 'tools']"></fa-icon>
-              <fa-icon class="ml-3" [icon]="['fas', 'trash-alt']" (click)="deleteTask(task.id)"></fa-icon>
+          <!-- <li id="listItem" class="list-group-item d-flex justify-content-between" *ngFor="let task of tasks"> -->
+          <li id="listItem" class="list-group-item" *ngFor="let task of tasks">
+            <div class="row">
+
+              <div class="col-12 d-flex justify-content-between">
+                <div>{{ task.name }}</div>
+
+                <div>
+                  <fa-icon class="mx-3" [icon]="['fas', 'tools']" (click)="openModal(modal, task)"></fa-icon>
+                  <fa-icon class="ml-3" [icon]="['fas', 'trash-alt']" (click)="deleteTask(task.id)"></fa-icon>
+                </div>
+              </div>
+
+              <div id="details" class="col-12">
+                <div class="w-100">{{ task.details }}</div>
+              </div>
+
             </div>
+
           </li>
         </ul>
       </li>
@@ -49,17 +51,22 @@
       <form #taskForm="ngForm">
         <div class="form-group">
           <label for="name">Name:</label>
-          <input type="text" class="form-control" id="name" required autofocus [(ngModel)]="newTaskModel.name" name="name" #name="ngModel">
+          <input type="text" class="form-control" id="name" required autofocus [(ngModel)]="taskFormModel.name" name="name" #name="ngModel">
           <div [hidden]="name.valid || name.pristine" class="alert alert-danger">Name is required</div>
         </div>
 
         <div class="form-group">
           <label for="details">Details:</label>
-          <input type="text" class="form-control" id="details" required [(ngModel)]="newTaskModel.details" name="details" #details="ngModel">
+          <input type="text" class="form-control" id="details" required [(ngModel)]="taskFormModel.details" name="details" #details="ngModel">
           <div [hidden]="details.valid || details.pristine" class="alert alert-danger">Details is required</div>
         </div>
 
-        <button type="submit" class="btn btn-success" [disabled]="!taskForm.form.valid" (click)="createTask(newTaskModel); taskForm.reset(); modalRef.hide();">Submit</button>
+        <div class="form-group" *ngIf="edit">
+          <label for="id">ID: </label>
+          <input type="text" class="form-control" id="id" disabled [(ngModel)]="taskFormModel.id" name="id" #id="ngModel">
+        </div>
+
+        <button type="submit" class="btn btn-success" [disabled]="!taskForm.form.valid" (click)="submit(taskFormModel, edit); taskForm.reset(); modalRef.hide();">{{ formSubmitBtnText }}</button>
       </form>
     </div>
   </ng-template>

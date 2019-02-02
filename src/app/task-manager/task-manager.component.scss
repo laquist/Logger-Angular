@@ -10,14 +10,25 @@
 }
 
 #listItem {
-    transition: all .2s ease-in-out;
+    transition: all .3s ease-in-out;
     
     &:hover {
         box-shadow: 0 0 .4rem rgba(red,1);
         transform: scale(1.010);
-    }
 
+        #details {
+            display: block;
+        }
+    }
+    
     fa-icon {
         cursor: pointer;
+    }
+    
+    #details {
+        display: none;
+
+        color: grey;
+        font-style: italic;
     }
 }
